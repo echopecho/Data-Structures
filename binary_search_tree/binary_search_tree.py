@@ -40,6 +40,32 @@ class BinarySearchTree:
         if self.left:
             self.left.for_each(cb)
 
+    def dft_non_recursive(self, cb):
+        stack = []
+        stack.append(self)
+
+        while len(stack):
+            current_node = stack.pop()
+            if current_node.left:
+                stack.append(current_node.left)
+            if current_node.right:
+                stack.append(current_node.right)
+            cb(current_node.value)
+
+    # def bft_for_each(self, cb):
+    #     # assume we imported Queue class
+    #     q = Queue()
+    #     q.enqueue(self)
+
+    #     while len(q):
+    #         current_node = q.dequeue()
+    #         if current_node.left:
+    #             q.enqueue(current_node.left)
+    #         if current_node.right:
+    #             q.enqueue(current_node.right)
+
+    #         cb(current_node.value)
+
 
 test = BinarySearchTree(4)
 test.insert(3)
@@ -55,3 +81,4 @@ def test_func(value):
 
 
 test.for_each(test_func)
+
